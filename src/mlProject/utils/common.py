@@ -1,5 +1,5 @@
-import os                          # o5 → os
-from box.exceptions import BoxValueError   # BoxValueErör → BoxValueError
+import os
+from box.exceptions import BoxValueError
 import yaml
 from mlProject import logger
 import json
@@ -12,7 +12,7 @@ from typing import Any
 
 
 @ensure_annotations
-def read_yaml(path_to_yaml: Path) -> ConfigBox:   # read yaml → read_yaml (space removed)
+def read_yaml(path_to_yaml: Path) -> ConfigBox:
     """reads yaml file and returns
 
     Args:
@@ -34,8 +34,9 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:   # read yaml → read_yaml (spa
         raise ValueError("yaml file is empty")
     except Exception as e:
         raise e
-    
-    @ensure_annotations
+
+
+@ensure_annotations  # ← moved back to column 0, was indented inside read_yaml
 def create_directories(path_to_directories: list, verbose=True):
     """create list of directories
 
@@ -46,7 +47,7 @@ def create_directories(path_to_directories: list, verbose=True):
     for path in path_to_directories:
         os.makedirs(path, exist_ok=True)
         if verbose:
-            logger.info(f"created directory at: {path}")  # (path) → {path}
+            logger.info(f"created directory at: {path}")
 
 
 @ensure_annotations
