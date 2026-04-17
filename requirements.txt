@@ -7,7 +7,6 @@ matplotlib>=3.7.1
 python-box==6.0.2
 PyYAML
 tqdm
-ensure==1.0.2
 joblib
 types-PyYAML
 Flask
