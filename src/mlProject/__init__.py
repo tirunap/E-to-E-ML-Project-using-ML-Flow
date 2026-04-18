@@ -16,7 +16,9 @@ logging.basicConfig(
         logging.FileHandler(log_filepath),    
         logging.StreamHandler(sys.stdout)     
     ]                            
-)                                 
+)
+
+logger = logging.getLogger(__name__)                                 
 
 logger = logging.getLogger("mlProjectLogger")  
 

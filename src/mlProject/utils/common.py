@@ -1,12 +1,12 @@
 import os
 from box.exceptions import BoxValueError
 import yaml
-from mlProject import logger
+from .. import logger
 import json
 import joblib
 from box import ConfigBox
 from pathlib import Path
-from typing import Any
+from typing import Any, List
 
 
 
@@ -34,7 +34,7 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
         raise e
 
 
-def create_directories(path_to_directories: list, verbose=True):
+def create_directories(path_to_directories: List[str], verbose=True):
     """create list of directories
 
     Args:
