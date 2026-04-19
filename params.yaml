@@ -1,0 +1,13 @@
+# Model training parameters
+model:
+  random_state: 42
+  test_size: 0.2
+
+# Data preprocessing parameters
+preprocessing:
+  missing_threshold: 0.3
+  outlier_method: iqr
+
+# Validation parameters
+validation:
+  drift_threshold: 0.1
