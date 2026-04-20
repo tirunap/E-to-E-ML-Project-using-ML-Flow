@@ -11,3 +11,7 @@ preprocessing:
 # Validation parameters
 validation:
   drift_threshold: 0.1
+
+model_trainer:
+  alpha: 0.5
+  l1_ratio: 0.7

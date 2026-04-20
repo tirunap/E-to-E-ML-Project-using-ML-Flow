@@ -1,6 +1,6 @@
 from pathlib import Path
 from mlProject.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH, SCHEMA_FILE_PATH
-from mlProject.entity.config_entity import DataIngestionConfig, DataValidationConfig
+from mlProject.entity.config_entity import DataIngestionConfig, DataTransformationConfig, DataValidationConfig, ModelTrainerConfig
 from mlProject.utils.common import create_directories, read_yaml
 
 
@@ -45,3 +45,37 @@ class ConfigurationManager:
         )
 
         return data_validation_config
+    
+
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        config = self.config.data_transformation
+
+        create_directories([config.root_dir])
+
+        data_transformation_config = DataTransformationConfig(
+            root_dir=Path(config.root_dir),
+            data_path=Path(config.data_path),
+            transformed_data_path=Path(config.transformed_data_path),
+        )
+
+        return data_transformation_config
+
+    def get_model_trainer_config(self) -> ModelTrainerConfig:
+        config = self.config.model_trainer
+        params = self.params.model_trainer
+        schema = self.schema.TARGET_Column
+
+        create_directories([config.root_dir])
+
+        model_trainer_config = ModelTrainerConfig(
+            root_dir=Path(config.root_dir),
+            train_data_path=Path(config.train_data_path),
+            test_data_path=Path(config.test_data_path),
+            model_name=config.model_name,
+            alpha=params.alpha,
+            l1_ratio=params.l1_ratio,
+            target_column=schema.name,
+        )
+
+        return model_trainer_config
+
