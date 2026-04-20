@@ -1,6 +1,6 @@
 from pathlib import Path
 from mlProject.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH, SCHEMA_FILE_PATH
-from mlProject.entity.config_entity import DataIngestionConfig, DataTransformationConfig, DataValidationConfig, ModelTrainerConfig
+from mlProject.entity.config_entity import DataIngestionConfig, DataTransformationConfig, DataValidationConfig, ModelTrainerConfig, TrainingPipelineConfig 
 from mlProject.utils.common import create_directories, read_yaml
 
 
@@ -79,3 +79,16 @@ class ConfigurationManager:
 
         return model_trainer_config
 
+    def get_model_evaluation_config(self) -> TrainingPipelineConfig:
+        training_pipeline_config = self.config.training_pipeline_config
+        training_pipeline_config = TrainingPipelineConfig(
+            root_dir=Path(training_pipeline_config.root_dir),
+            test_data_path=Path(training_pipeline_config.test_data_path),
+            model_path=Path(training_pipeline_config.model_path),
+            all_params=self.params,
+            metric_file_path=Path(training_pipeline_config.metric_file_path),
+            target_column=self.config.target_column,
+            mlflow_uri=self.config.mlflow_uri
+        )
+        create_directories([training_pipeline_config.root_dir])
+        return training_pipeline_config
