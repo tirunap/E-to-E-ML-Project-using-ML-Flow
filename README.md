@@ -45,12 +45,20 @@ Now,
 ...bash
 open up your local host and port 
 
+### STEP 03 - Run the application
+
+'''bash
+python app.py
+
+### STEP 04 - Open your localhost and port (e.g., http://127.0.0.1:5000)
 
 
 
 ## ML Flow
 
 [Documentation](FILE'S LINK)
+'''bash
+mlflow ui
 
 
 ##### cmd
@@ -60,7 +68,7 @@ open up your local host and port
 
 MLFLOW_TRACKING_URI=https://dagshub.com/tirunap/E-to-E-ML-Project-using-ML-Flow.mlflow
 MLFLOW_TRACKING_USERNAME=tirunap
-MLFLOW_TRACKING_PASSWORD=*******
+MLFLOW_TRACKING_PASSWORD=23Jan@1995
 python script.py
 
 Run this to export as env variables 
@@ -79,3 +87,101 @@ $env:MLFLOW_TRACKING_USERNAME="tirunap"
 $env:MLFLOW_TRACKING_PASSWORD="23Jan@1995"
 ```
 
+
+
+
+# AWS CI/CD Deployment with GitHub Actions
+
+This repository demonstrates how to set up a **Continuous Integration (CI)** and **Continuous Deployment (CD)** pipeline using **GitHub Actions** and **Amazon Web Services (AWS)**.  
+The pipeline automatically runs tests, builds a Docker image, pushes it to **Amazon ECR**, and deploys it to **Amazon ECS**
+
+
+## 🚀 Workflow Overview
+
+The GitHub Actions workflow (`.github/workflows/main.yaml`) is triggered on every push to the `main` branch. It performs the following steps:
+
+1. **Checkout Code** – Pulls the latest code from GitHub.
+2. **Set up Python** – Configures Python 3.8 environment.
+3. **Install Dependencies** – Installs packages from `requirements.txt`.
+4. **Run Tests** – Executes unit tests with `pytest`.
+5. **Authenticate with AWS** – Uses GitHub Secrets for AWS credentials.
+6. **Build & Push Docker Image** – Builds the project into a Docker image and pushes it to **Amazon ECR**.
+7. **Deploy to ECS** – Updates the ECS service with the new image.
+
+---
+
+## 📂 Project Structure
+
+.
+├── src/                # Source code
+├── tests/              # Unit tests
+├── main.py             # Entry point (tokenization pipeline example)
+├── requirements.txt    # Python dependencies
+├── Dockerfile          # Docker build instructions
+└── .github/workflows/  # GitHub Actions workflows
+└── main.yaml
+
+
+
+---
+
+## 🔑 Prerequisites
+
+- **AWS Account** with ECS and ECR set up.
+- **ECR Repository** created (035885606553.dkr.ecr.ap-south-1.amazonaws.com/mlproject).
+- ** CREATE EC2 mschine(Ubuntu)
+- ** Open EC2 and Install docker in EC2 Machine:
+    - ### Optional
+    'sudo apt-get update -y'
+    'sudo apt-get upgrade'
+    - ### Docker
+    'curl -fsSL https://get.docker.com -o get-docker.sh'
+    'sudo sh get.docker.sh
+    'sudo usermod -aG docker ubuntu'
+    'new grp docker'
+    - ### Configure EC@ as self-hosted runner:
+    setting-action-runner-new self hosted-choose os- then run command one by one
+- **GitHub Secrets** configured:
+  - `AWS_ACCESS_KEY_ID`
+  - `AWS_SECRET_ACCESS_KEY`
+  - `AWS_REGION` - Asia Pacific (Mumbai)
+  - `AWS_ECR_LOGIN_URI`- demo>> 
+  - `AWS_REPOSITORY_NAME` - xxxxx
+- **Dockerfile** at the root of the repo.
+- **ECS Task Definition JSON** (`ecs-task-def.json`) describing how the container runs.
+
+---
+
+## ⚙️ Setup Instructions
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/<your-username>/<your-repo>.git
+   cd <your-repo>
+
+2. Create a virtual environment and install dependencies:
+    '''bash
+    python -m venv .venv
+    source .venv/bin/activate   # Linux/Mac
+    .venv\Scripts\activate      # Windows
+    pip install -r requirements.txt
+
+3. Run locally:
+    '''bash
+    python main.py --text "Hello AWS CI/CD!"
+    
+4. Push changes to main branch:
+    '''bash
+    git add .
+    git commit -m "Setup AWS CI/CD pipeline"
+    git push origin main
+
+
+# Deployment Flow
+GitHub Actions builds and tests your code.
+
+Docker image is created and pushed to Amazon ECR.
+
+ECS service is updated with the new image.
+
+Your application runs in AWS automatically.
