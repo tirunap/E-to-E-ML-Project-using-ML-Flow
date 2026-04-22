@@ -146,7 +146,7 @@ The GitHub Actions workflow (`.github/workflows/main.yaml`) is triggered on ever
   - `AWS_SECRET_ACCESS_KEY`
   - `AWS_REGION` - Asia Pacific (Mumbai)
   - `AWS_ECR_LOGIN_URI`- demo>> 
-  - `AWS_REPOSITORY_NAME` - xxxxx
+  - `AWS_REPOSITORY_NAME` - mlproject
 - **Dockerfile** at the root of the repo.
 - **ECS Task Definition JSON** (`ecs-task-def.json`) describing how the container runs.
 
