@@ -178,10 +178,10 @@ The GitHub Actions workflow (`.github/workflows/main.yaml`) is triggered on ever
 
 
 # Deployment Flow
-GitHub Actions builds and tests your code.
+GitHub Actions builds and tests code.
 
 Docker image is created and pushed to Amazon ECR.
 
 ECS service is updated with the new image.
 
-Your application runs in AWS automatically.
+Application runs in AWS automatically.
